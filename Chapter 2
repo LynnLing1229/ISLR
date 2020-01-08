@@ -2,4 +2,92 @@
 (a) 容易欠拟合，使用光滑度（flexibility）高的
 (b) 容易过拟合（n太小），使用光滑度低的
 (c) 线性回归光滑度低，故使用光滑度高的
-(d) 方差大，使用光滑度高的
+(d) 方差大，使用光滑度低的
+
+2.
+(a)Inference
+(b)Prediction
+(c)Inference and Prediction
+
+3. Exactly same in the book.
+
+4. 略
+
+5. 
+光滑度高的分类模型training MSE更低，但容易过拟合
+光滑度低的分类模型MSE可能偏高，且有可能与原f毫无关系
+线性关系，或者数据点多，但是feature少的用光滑度低的
+非线性关系，或数据点少feature多的，用光滑度高的
+Prediction 用光滑度高的，inference用光滑度低的
+
+6.
+参数模型：简化到一组参数，更容易，不需要拟合任意f，缺点是模型可能根本不对或者overfit了
+非参数模型：更灵活，但容易过拟合，而且需要观察的数据点多
+
+7.
+(1) 平方开根
+(2) Green
+(3) Red
+(4) 小
+
+8.
+(a) college = read.csv("College.csv", header = T, na.strings = "?")
+(b) rownames(college) = college[, 1]
+	college = college[, -1]
+	把第一列换成一个rownames然后删掉了
+(c) summary(college)
+	
+	pairs(college[, 1:10])
+	
+	plot(college$Private, college$Outstate)
+	
+	Elite = rep("No", nrow(college))
+	Elite[college$Top10perc > 50] = "Yes"
+	Elite = as.factor(Elite)
+	college = data.frame(college, Elite)
+	fix(college)
+	plot(college$Elite, college$Outstate)
+	
+	par(mfrow = c(2,2))
+	hist(college$Apps)
+	hist(college$perc.alumni, col = 2)
+	
+9.
+(a)
+	qualitative:names, origin
+	quantitative: the rest of features
+	
+(b)
+	sapply(auto[, 1:7], range)
+(c)
+	sapply(auto[, 1:7], mean)
+	sapply(auto[, 1:7], sd)
+(d)
+	neauto = auto[-(10:85),]
+	sapply(neauto[, 1:7], range)
+(f) 
+	pairs(auto)
+
+10.
+(a)
+	506 row, 14 columns
+(b)
+	pairs(Boston)
+(c)
+	plot(Boston$age, Boston$crim)
+(d)
+	par(mfrow=c(1,3))
+	hist(Boston$crim[Boston$crim>1], breaks=25)
+	hist(Boston$tax,breaks=25)
+	hist(Boston$ptratio, breaks=25)
+(e)
+	dim(subset(Boston, chas == 1))
+(f)
+	median(Boston$ptratio)
+(g)
+	t(subset(Boston,medv == min(Boston$medv)))
+(h)
+	dim(subset(Boston, rm > 7))
+	dim(subset(Boston, rm > 8))
+	summary(subset(Boston, rm > 8))
+	
